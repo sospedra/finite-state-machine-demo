@@ -13,7 +13,7 @@ import Machine, {
   withMachine
 } from './machine'
 
-const machine = Machine({
+export const machine = {
   initial: states.IDLE,
   states: {
     [states.IDLE]: {
@@ -35,9 +35,9 @@ const machine = Machine({
     },
     [states.FAILURE]: { on: {} }
   }
-})
+}
 
-class App extends React.Component {
+export class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = { user: {} }
@@ -86,4 +86,4 @@ class App extends React.Component {
   }
 }
 
-export default withMachine(machine)(App)
+export default withMachine(Machine(machine))(App)

@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render all the possible states 1`] = `
+<main
+  className="sc-bwzfXH ceTrXN"
+>
+  <p
+    className="sc-htpNat cdeVmq"
+  >
+    State: 
+    IDLE
+  </p>
+  <p
+    className="sc-htpNat cdeVmq"
+  >
+    Let's do a search 
+    <span
+      aria-label="emoji"
+      role="img"
+    >
+      🕵🏻‍♂️
+    </span>
+  </p>
+  <button
+    className="sc-bdVaJa iSLsWi"
+    onClick={[Function]}
+  >
+    Find new one!
+  </button>
+</main>
+`;
+
+exports[`should render all the possible states 2`] = `
+<main
+  className="sc-bwzfXH ceTrXN"
+>
+  <p
+    className="sc-htpNat cdeVmq"
+  >
+    State: 
+    FETCHING
+  </p>
+  <p
+    className="sc-htpNat cdeVmq"
+  >
+    <span
+      aria-label="emoji"
+      role="img"
+    >
+      👀
+    </span>
+  </p>
+  <button
+    className="sc-bdVaJa hwcSD"
+    disabled={true}
+  >
+    Searching...
+  </button>
+</main>
+`;
+
+exports[`should render all the possible states 3`] = `
+<main
+  className="sc-bwzfXH ceTrXN"
+>
+  <p
+    className="sc-htpNat cdeVmq"
+  >
+    State: 
+    SUCCESS
+  </p>
+  <p
+    className="sc-htpNat cdeVmq"
+  >
+    <span
+      aria-label="emoji"
+      role="img"
+    />
+     
+  </p>
+  <button
+    className="sc-bdVaJa iSLsWi"
+    onClick={[Function]}
+  >
+    Find another
+  </button>
+</main>
+`;
+
+exports[`should render all the possible states 4`] = `
+<main
+  className="sc-bwzfXH ceTrXN"
+>
+  <p
+    className="sc-htpNat cdeVmq"
+  >
+    State: 
+    FAILURE
+  </p>
+  <p
+    className="sc-htpNat cdeVmq"
+  >
+    Something went wrong 
+    <span
+      aria-label="emoji"
+      role="img"
+    >
+      💩
+    </span>
+  </p>
+</main>
+`;
