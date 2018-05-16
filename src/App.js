@@ -1,21 +1,89 @@
-import React, { Component } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React from 'react'
 
-class App extends Component {
+import Error from './components/Error'
+import Idle from './components/Idle'
+import Loading from './components/Loading'
+import User from './components/User'
+import { Main, Text } from './styled'
+import { fetchUser } from './repository'
+import Machine, {
+  events,
+  actions,
+  states,
+  withMachine
+} from './machine'
+
+const machine = Machine({
+  initial: states.IDLE,
+  states: {
+    [states.IDLE]: {
+      on: {
+        [events.FETCH]: states.FETCHING
+      }
+    },
+    [states.FETCHING]: {
+      on: {
+        [events.FULFILL]: states.SUCCESS,
+        [events.FAIL]: states.FAILURE
+      },
+      action: actions.FETCH_USER
+    },
+    [states.SUCCESS]: {
+      on: {
+        [events.FETCH]: states.FETCHING
+      }
+    },
+    [states.FAILURE]: { on: {} }
+  }
+})
+
+class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { user: {} }
+
+    // Add commands listeners
+    props.commands({
+      [actions.FETCH_USER]: () => this.fetchUser()
+    })
+  }
+
+  async fetchUser () {
+    try {
+      const user = await fetchUser()
+
+      this.setState({ user }, () => {
+        this.props.transition(events.FULFILL)
+      })
+    } catch (e) {
+      this.props.transition(events.FAIL)
+    }
+  }
+
+  renderFromMachine () {
+    switch (this.props.machineState) {
+      case states.IDLE: return <Idle
+        transition={this.props.transition}
+      />
+      case states.FETCHING: return <Loading />
+      case states.SUCCESS: return <User
+        user={this.state.user}
+        transition={this.props.transition}
+      />
+      case states.FAILURE:
+      default:
+        return <Error />
+    }
+  }
+
   render () {
     return (
-      <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>Welcome to React</h1>
-        </header>
-        <p className='App-intro'>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Main>
+        <Text>State: {this.props.machineState}</Text>
+        {this.renderFromMachine()}
+      </Main>
     )
   }
 }
 
-export default App
+export default withMachine(machine)(App)
