@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text, Emoji, Button } from '../styled'
+import { Text, Emoji, Button } from './styled'
 
 export default (props) => (
   <React.Fragment>

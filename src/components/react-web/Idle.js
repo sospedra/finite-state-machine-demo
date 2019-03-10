@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Text, Button, Emoji } from '../styled'
-import { events } from '../machine'
+import { events } from '../../machine'
+import { Text, Button, Emoji } from './styled'
 
 export default (props) => (
   <React.Fragment>

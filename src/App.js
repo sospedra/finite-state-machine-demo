@@ -1,10 +1,6 @@
 import React from 'react'
 
-import Error from './components/Error'
-import Idle from './components/Idle'
-import Loading from './components/Loading'
-import User from './components/User'
-import { Main, Text } from './styled'
+import Components from './components'
 import { fetchUser } from './repository'
 import Machine, {
   events,
@@ -37,6 +33,8 @@ export const machine = {
   }
 }
 
+const { Error, Idle, Loading, User, Main, Text } = Components
+
 export class App extends React.Component {
   constructor (props) {
     super(props)
@@ -44,7 +42,7 @@ export class App extends React.Component {
 
     // Add commands listeners
     props.commands({
-      [actions.FETCH_USER]: () => this.fetchUser()
+      [actions.FETCH_USER]: this.fetchUser.bind(this)
     })
   }
 
