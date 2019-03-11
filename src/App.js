@@ -40,7 +40,6 @@ export class App extends React.Component {
     super(props)
     this.state = { user: {} }
 
-    // Add commands listeners
     props.commands({
       [actions.FETCH_USER]: this.fetchUser.bind(this)
     })

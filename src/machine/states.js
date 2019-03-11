@@ -1,4 +1,4 @@
-export const FAILURE = 'FAILURE'
-export const FETCHING = 'FETCHING'
-export const IDLE = 'IDLE'
-export const SUCCESS = 'SUCCESS'
+export const FAILURE = Symbol('FAILURE')
+export const FETCHING = Symbol('FETCHING')
+export const IDLE = Symbol('IDLE')
+export const SUCCESS = Symbol('SUCCESS')
