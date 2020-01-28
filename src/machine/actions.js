@@ -1,1 +1,1 @@
-export const FETCH_USER = Symbol('FETCH_USER')
+export const FETCHING = Symbol('FETCHING')

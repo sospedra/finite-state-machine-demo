@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Components from './components'
 import { fetchUser } from './repository'
 import Machine, {
@@ -22,7 +21,7 @@ export const machine = {
         [events.FULFILL]: states.SUCCESS,
         [events.FAIL]: states.FAILURE
       },
-      action: actions.FETCH_USER
+      action: actions.FETCHING
     },
     [states.SUCCESS]: {
       on: {
@@ -41,13 +40,14 @@ export class App extends React.Component {
     this.state = { user: {} }
 
     props.commands({
-      [actions.FETCH_USER]: this.fetchUser.bind(this)
+      [actions.FETCHING]: this.fetchUser.bind(this)
     })
   }
 
   async fetchUser () {
     try {
       const user = await fetchUser()
+      // throw Error()
 
       this.setState({ user }, () => {
         this.props.transition(events.FULFILL)
